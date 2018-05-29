@@ -11,6 +11,14 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+<tal:repeat repeat="brain view/fileBrains">
+    <p>${brain/Title}</p>
+    <img src="${python: brain.getObject().absolute_url()}/@@images/image" />
+    <a href="${python: brain.getObject().absolute_url()}/@@download/file">file download</a>
+    <p tal:define="size python:brain.getObject().file.size">
+        ${python: round(float(size) / (1024 * 1024), 1)}MB 
+    </p>
+</tal:repeat>
 
 </metal:content-core>
 </metal:content-core>
