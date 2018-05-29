@@ -13,7 +13,15 @@ class DownloadFileView(BrowserView):
         self.fileBrains = fileBrains
         return self.template()
 
+
 class ProductView(BrowserView):
     template = ViewPageTemplateFile('templates/product_view.pt')
     def __call__(self):
+        import pdb;pdb.set_trace()
+        imgList = []
+        if self.context.cover != None:
+            imgList.append(self.context.cover)
+#        if api.content.find:
+            
+
         return self.template()
