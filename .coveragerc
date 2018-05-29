@@ -1,0 +1,6 @@
+[report]
+include =
+    src/gct/*
+omit =
+    */test*
+    */upgrades/*
