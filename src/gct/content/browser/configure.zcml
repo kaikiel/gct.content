@@ -18,4 +18,12 @@
       directory="static"
       />
 
+  <browser:page
+      name="download_file_view"
+      for="*"
+      class=".views.DownloadFileView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
 </configure>
