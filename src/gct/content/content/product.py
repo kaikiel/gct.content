@@ -8,7 +8,7 @@ from plone.app.textfield import RichText
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile, NamedImage
 
 class IProduct(model.Schema):
-    name = schema.TextLine(
+    title = schema.TextLine(
         title=_(u'Name'),
         required=True,
     )

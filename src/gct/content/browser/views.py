@@ -12,3 +12,8 @@ class DownloadFileView(BrowserView):
         file_brains = api.content.find(context=portal['file_content'], portal_type='File')
         self.file_brains = file_brains
         return self.template()
+
+class ProductView(BrowserView):
+    template = ViewPageTemplateFile('templates/product_view.pt')
+    def __call__(self):
+        return self.template()
