@@ -19,37 +19,19 @@
 
   <!-- Hierarchy control -->
   <property name="global_allow">True</property>
-  <property name="filter_content_types">False</property>
+  <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-  <!--
-    <element value="Document" />
-    <element value="File" />
-  -->
+    <element value="Image" />
   </property>
   <!-- Schema, class and security -->
   <property name="add_permission">gct.content.AddProduct</property>
-  <property name="klass">gct.content.content.product.Product</property>
+  <property name="klass">gct.content.interfaces.FolderishContent</property>
   <property name="model_file">gct.content.content:product.xml</property>
   <property name="model_source"></property>
-  <property name="schema"></property>
+  <property name="schema">gct.content.content.product.IProduct</property>
 
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
-    <element value="plone.app.content.interfaces.INameFromTitle"/>
-    <element value="plone.app.dexterity.behaviors.discussion.IAllowDiscussion"/>
-    <element value="plone.app.dexterity.behaviors.exclfromnav.IExcludeFromNavigation"/>
-    <element value="plone.app.dexterity.behaviors.id.IShortName"/>
-    <element value="plone.app.dexterity.behaviors.metadata.IOwnership"/>
-    <element value="plone.app.dexterity.behaviors.metadata.IPublication"/>
-    <element value="plone.app.dexterity.behaviors.metadata.ICategorization"/>
-    <element value="plone.app.dexterity.behaviors.metadata.IBasic"/>
-    <!--<element value="plone.app.referenceablebehavior.referenceable.IReferenceable" />-->
-    <element value="plone.app.lockingbehavior.behaviors.ILocking" />
-    <!--<element value="plone.app.contenttypes.behaviors.leadimage.ILeadImage"/>-->
-    <!--<element value="plone.app.relationfield.behavior.IRelatedItems"/>-->
-    <!--<element value="plone.app.versioningbehavior.behaviors.IVersionable" />-->
-    <!--<element value="plone.app.contenttypes.behaviors.tableofcontents.ITableOfContents"/>-->
-    <!--<element value="plone.app.contenttypes.behaviors.richtext.IRichText"/>-->
   </property>
 
   <!-- View information -->
