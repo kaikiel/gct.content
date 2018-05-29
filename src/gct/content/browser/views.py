@@ -9,6 +9,6 @@ class DownloadFileView(BrowserView):
     def __call__(self):
         request = self.request
         portal = api.portal.get()
-        file_brains = api.content.find(context=portal['file_content'], portal_type='File')
-        self.file_brains = file_brains
+        fileBrains = api.content.find(context=portal['file_content'], portal_type='File')
+        self.fileBrains = fileBrains
         return self.template()
