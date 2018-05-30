@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from gct.content import _
+from zope import schema
 from plone.dexterity.content import Container
 from plone.supermodel import model
 from zope.interface import implementer
-from zope import schema
 from plone.app.textfield import RichText
 from z3c.relationfield.schema import RelationChoice, RelationList
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile, NamedImage
+
 
 class IProduct(model.Schema):
     title = schema.TextLine(

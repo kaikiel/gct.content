@@ -17,20 +17,19 @@ class DownloadFileView(BrowserView):
 class ProductView(BrowserView):
     template = ViewPageTemplateFile('templates/product_view.pt')
     def __call__(self):
-        import pdb;pdb.set_trace()
         imgList = []
         coverImg = self.context.cover
 #        if coverImg != None:
 #            imgList.append(self.context.absolute_url()+'/@@images/cover')
         productImgs = api.content.find(context=self.context, depth=1)
         for item in productImgs:
-            imgList.append(item.getObject().absolute_url())
+            imgList.append('{}/@@images/image'.format(item.getObject().absolute_url()))
         self.imgList = imgList
         
         self.title = self.context.title
         self.modelNo = self.context.modelNo
         self.beApplicable = self.context.beApplicable
         self.characteristic = self.context.characteristic
-        self.body = self.context.body.raw
+        self.body = self.context.body.raw if self.context.body != None else None
         
         return self.template()

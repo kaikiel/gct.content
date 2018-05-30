@@ -21,7 +21,7 @@
   <property name="global_allow">True</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="Image" />
+    <element value="ProductIMG" />
   </property>
   <!-- Schema, class and security -->
   <property name="add_permission">gct.content.AddProduct</property>
@@ -33,6 +33,8 @@
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
     <element value="plone.app.content.interfaces.INameFromTitle"/>
+    <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
+    <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
   </property>
 
   <!-- View information -->

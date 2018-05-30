@@ -15,7 +15,7 @@ ${view/title}
 ${view/modelNo}
 ${view/beApplicable}
 ${view/characteristic}
-${ view/body}
+${view/body}
 <tal:repeat repeat="item view/imgList">
     <img class="product-image-preview" tal:attributes="src string:${item}"  />
 </tal:repeat>
