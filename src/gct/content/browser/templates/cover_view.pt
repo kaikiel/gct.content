@@ -1,0 +1,34 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+    xmlns:tal="http://xml.zope.org/namespaces/tal"
+    xmlns:metal="http://xml.zope.org/namespaces/metal"
+    xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+    xmlns:v-on="http://vuejs.org"
+    lang="en"
+    metal:use-macro="context/main_template/macros/master"
+    i18n:domain="gct.content">
+<body>
+<metal:content-core fill-slot="content-core">
+<metal:content-core define-macro="content-core"
+                    tal:define="toc context/table_of_contents|nothing;">
+<h2>News</h2>
+<tal:repNew repeat="product view/productBrains">
+    <p>${product/Title}</p>
+    <p>型號：${python: product.getObject().modelNo}</p>
+    <img src="${python: product.getObject().absolute_url()}/@@images/cover/mini">
+</tal:repNew>
+
+<h2>Feature</h2>
+<tal:repFeature repeat="feature view/featureList">
+    <tal:defFeature define="obj python: feature.to_object">
+        <p>${python: obj.title}</p>
+        <p>型號：${python: obj.modelNo}</p>
+        <img src="${python: obj.absolute_url()}/@@images/cover/mini">
+    </tal:defFeature>
+</tal:repFeature>
+
+
+</metal:content-core>
+</metal:content-core>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:plone="http://namespaces.plone.org/plone"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="gct.content">
+
+    <subscriber
+        for="gct.content.content.product.IProduct 
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.move_to_top"
+    />
+
+</configure>

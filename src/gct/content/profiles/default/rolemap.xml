@@ -3,6 +3,14 @@
   <permissions>
   <!-- -*- extra stuff goes here -*- -->
 
+    <permission name="gct.content: Add Cover" acquire="True">
+      <role name="Manager"/>
+      <role name="Site Administrator"/>
+      <role name="Owner"/>
+      <role name="Contributor"/>
+    </permission>
+
+        
     <permission name="gct.content: Add Product" acquire="True">
       <role name="Manager"/>
       <role name="Site Administrator"/>
