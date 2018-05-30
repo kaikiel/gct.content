@@ -38,4 +38,4 @@ class IProduct(model.Schema):
         title=_(u"Cover Image"),
         required=False,
     )
-
+    
