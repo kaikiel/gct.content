@@ -33,3 +33,18 @@ class ProductView(BrowserView):
         self.body = self.context.body.raw if self.context.body != None else None
         
         return self.template()
+
+
+class CoverView(BrowserView):
+    template = ViewPageTemplateFile('templates/cover_view.pt')
+    def __call__(self):
+        request = self.request
+        portal = api.portal.get()
+
+        productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
+        self.productBrains = productBrains
+
+        featureList = self.context.feature
+        self.featureList = featureList
+
+	return self.template()

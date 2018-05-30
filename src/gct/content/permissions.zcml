@@ -7,10 +7,14 @@
   <!-- -*- extra stuff goes here -*- -->
 
     <permission
+        id="gct.content.AddCover"
+        title="gct.content: Add Cover"
+    />
+
+    <permission
         id="gct.content.AddProductimg"
         title="gct.content: Add Productimg"
     />
-
         
     <permission
         id="gct.content.AddProduct"

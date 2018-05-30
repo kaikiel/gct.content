@@ -34,4 +34,12 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="cover_view"
+      for="gct.content.content.cover.ICover"
+      class=".views.CoverView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
 </configure>
