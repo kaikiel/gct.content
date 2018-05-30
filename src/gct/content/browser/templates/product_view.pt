@@ -11,6 +11,14 @@
 <metal:content-core define-macro="content-core"
                     tal:define="toc context/table_of_contents|nothing;">
 
+${view/title}
+${view/modelNo}
+${view/beApplicable}
+${view/characteristic}
+${ view/body}
+<tal:repeat repeat="item view/imgList">
+    <img class="product-image-preview" tal:attributes="src string:${item}"  />
+</tal:repeat>
 
 </metal:content-core>
 </metal:content-core>

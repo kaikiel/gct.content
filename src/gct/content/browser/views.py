@@ -19,9 +19,18 @@ class ProductView(BrowserView):
     def __call__(self):
         import pdb;pdb.set_trace()
         imgList = []
-        if self.context.cover != None:
-            imgList.append(self.context.cover)
-#        if api.content.find:
-            
-
+        coverImg = self.context.cover
+#        if coverImg != None:
+#            imgList.append(self.context.absolute_url()+'/@@images/cover')
+        productImgs = api.content.find(context=self.context, depth=1)
+        for item in productImgs:
+            imgList.append(item.getObject().absolute_url())
+        self.imgList = imgList
+        
+        self.title = self.context.title
+        self.modelNo = self.context.modelNo
+        self.beApplicable = self.context.beApplicable
+        self.characteristic = self.context.characteristic
+        self.body = self.context.body.raw
+        
         return self.template()

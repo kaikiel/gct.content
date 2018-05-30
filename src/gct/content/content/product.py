@@ -5,6 +5,7 @@ from plone.supermodel import model
 from zope.interface import implementer
 from zope import schema
 from plone.app.textfield import RichText
+from z3c.relationfield.schema import RelationChoice, RelationList
 from plone.namedfile.field import NamedBlobImage, NamedBlobFile, NamedImage
 
 class IProduct(model.Schema):
@@ -28,8 +29,8 @@ class IProduct(model.Schema):
         required=False,
     )
 
-    description = RichText(
-        title=_(u'Description'),
+    body = RichText(
+        title=_(u'Body'),
         required=False,
     )
 
