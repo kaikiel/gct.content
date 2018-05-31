@@ -21,3 +21,10 @@ class NewsProduct(base.ViewletBase):
         productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
         self.productBrains = productBrains
 
+
+class NewsItemBanner(base.ViewletBase):
+    def update(self):
+        request = self.request
+        portal = api.portal.get()
+        newsItemBrains = api.content.find(context=portal['news_container'], portal_type="News Item", sort_limit=3)
+        self.newsItemBrains = newsItemBrains
