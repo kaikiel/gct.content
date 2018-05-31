@@ -7,9 +7,19 @@
     <browser:viewlet
         name="cover_banner"
         for="gct.content.content.cover.ICover"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
         template="cover_banner.pt"
         class=".viewlet.CoverBanner"
+        layer="zope.interface.Interface"
+        permission="zope2.View"
+    />
+
+    <browser:viewlet
+        name="news_product"
+        for="gct.content.content.cover.ICover"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        template="news_product.pt"
+        class=".viewlet.NewsProduct"
         layer="zope.interface.Interface"
         permission="zope2.View"
     />
