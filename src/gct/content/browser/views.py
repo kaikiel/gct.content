@@ -48,3 +48,18 @@ class CoverView(BrowserView):
         self.featureList = featureList
 
 	return self.template()
+
+
+class FolderProductView(BrowserView):
+    template = ViewPageTemplateFile('templates/folder_product_view.pt')
+    def __call__(self):
+	return self.template()
+
+
+class FolderNewsView(BrowserView):
+    template = ViewPageTemplateFile('templates/folder_news_view.pt')
+    def __call__(self):
+        import pdb;pdb.set_trace()
+	return self.template()
+
+
