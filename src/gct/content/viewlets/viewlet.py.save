@@ -15,9 +15,11 @@ class CoverBanner(base.ViewletBase):
 
 
 class NewsProduct(base.ViewletBase):
-    def update(self):
+    def updagte(self):
         request = self.request
         portal = api.portal.get()
-        productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
+
+        
+productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
         self.productBrains = productBrains
 

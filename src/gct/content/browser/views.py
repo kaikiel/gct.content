@@ -43,9 +43,6 @@ class CoverView(BrowserView):
         request = self.request
         portal = api.portal.get()
 
-        productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
-        self.productBrains = productBrains
-
         featureList = self.context.feature
         self.featureList = featureList
 
