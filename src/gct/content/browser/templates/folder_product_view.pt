@@ -41,7 +41,7 @@
                       </a>
                     </span>
                   </header>
-                </article>
+                </article>              
               </metal:block>
             </tal:block>
           </tal:repeat>
