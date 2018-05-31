@@ -9,7 +9,7 @@ class DownloadFileView(BrowserView):
     def __call__(self):
         request = self.request
         portal = api.portal.get()
-        fileBrains = api.content.find(context=portal['file_content'], portal_type='File')
+        fileBrains = api.content.find(context=portal['file_container'], portal_type='File')
         self.fileBrains = fileBrains
         return self.template()
 
@@ -40,9 +40,6 @@ class CoverView(BrowserView):
     def __call__(self):
         request = self.request
         portal = api.portal.get()
-
-        productBrains = api.content.find(context=portal['products'], portal_type='Product', sort_limit=4)
-        self.productBrains = productBrains
 
         featureList = self.context.feature
         self.featureList = featureList
