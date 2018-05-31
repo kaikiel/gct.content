@@ -23,5 +23,15 @@
         layer="zope.interface.Interface"
         permission="zope2.View"
     />
+   
+    <browser:viewlet
+        name="news_item_banner"
+        for="gct.content.content.cover.ICover"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        template="news_item_banner.pt"
+        class=".viewlet.NewsItemBanner"
+        layer="zope.interface.Interface"
+        permission="zope2.View"
+    />
 
 </configure>
