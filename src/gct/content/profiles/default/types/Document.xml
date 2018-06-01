@@ -8,6 +8,7 @@
   <property name="view_methods">
     <element value="document_view"/>
     <element value="download_file_view" />
+    <element value="contact_us" />
   </property>
 
 </object>
