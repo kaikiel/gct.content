@@ -32,6 +32,9 @@ class FolderView(BrowserView):
     _portal_state = None
     _pas_member = None
 
+    def pdb(self):
+        import pdb;pdb.set_trace()
+
     @property
     def plone_view(self):
         if not self._plone_view:

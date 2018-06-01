@@ -9,7 +9,7 @@ class DownloadFileView(BrowserView):
     def __call__(self):
         request = self.request
         portal = api.portal.get()
-        fileBrains = api.content.find(path='gct/file_container'], portal_type='File')
+        fileBrains = api.content.find(path='gct/file_container', portal_type='File')
         self.fileBrains = fileBrains
         return self.template()
 
@@ -23,7 +23,7 @@ class ProductView(BrowserView):
 #            imgList.append(self.context.absolute_url()+'/@@images/cover')
         productImgs = api.content.find(context=self.context, depth=1)
         for item in productImgs:
-            imgList.append('{}/@@images/image'.format(item.getObject().absolute_url()))
+            imgList.append('{}/@@images/image/preview'.format(item.getObject().absolute_url()))
         self.imgList = imgList
         
         self.title = self.context.title
