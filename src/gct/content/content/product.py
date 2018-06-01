@@ -39,4 +39,13 @@ class IProduct(model.Schema):
         title=_(u"Cover Image"),
         required=False,
     )
-    
+
+    category = schema.TextLine(
+	title=_(u'Category'),
+	required=False,
+    )
+
+    subject = schema.TextLine(
+	title=_(u'Subject'),
+	required=False,
+    )

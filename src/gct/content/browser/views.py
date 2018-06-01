@@ -57,7 +57,6 @@ class FolderProductView(BrowserView):
 class FolderNewsView(BrowserView):
     template = ViewPageTemplateFile('templates/folder_news_view.pt')
     def __call__(self):
-        import pdb;pdb.set_trace()
 	return self.template()
 
 
