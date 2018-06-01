@@ -2,6 +2,7 @@
 from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
+from email.mime.text import MIMEText
 
 
 class DownloadFileView(BrowserView):
@@ -60,3 +61,21 @@ class FolderNewsView(BrowserView):
 	return self.template()
 
 
+class ContactUs(BrowserView):
+    template = ViewPageTemplateFile('templates/contact_us.pt')
+    def __call__(self):
+        request = self.request
+	name = request.get('name')
+	email = request.get('email')
+	message = request.get('message')
+	if name and email and message:
+	    body_str = """Name:{}<br/>Email:{}<br/>Message:{}""".format(name, email, message)
+            mime_text = MIMEText(body_str, 'html', 'utf-8')
+            api.portal.send_email(
+                recipient="ah13441673@gmail.com",
+                sender="henry@mingtak.com.tw",
+                subject="意見提供",
+                body=mime_text.as_string(),
+            )
+	api.portal.show_message(message='發送成功!'.decode('utf-8'), request=request)
+        return self.template()
