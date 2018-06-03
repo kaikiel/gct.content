@@ -78,3 +78,10 @@ class ContactUs(BrowserView):
             )
 	api.portal.show_message(message='發送成功!'.decode('utf-8'), request=request)
         return self.template()
+
+
+class NewsItemView(BrowserView):
+    template = ViewPageTemplateFile('templates/news_item_view.pt')
+    def __call__(self):
+        request = self.request
+        return self.template()
