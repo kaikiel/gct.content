@@ -14,7 +14,7 @@ from Products.Five import BrowserView
 from zope.component import getMultiAdapter
 from zope.component import getUtility
 from zope.contentprovider.interfaces import IContentProvider
-
+import ast
 import random
 
 
@@ -73,6 +73,11 @@ class FolderView(BrowserView):
         b_start = getattr(self.request, 'b_start', None) or 0
         return int(b_start)
 
+    @property
+    def short_by(self):
+        short_by = getattr(self.request, 'contentFilters', "{'sort_on':'sortable_title', 'sort_order':'ascending'}")
+        return short_by 
+
     def results(self, **kwargs):
         """Return a content listing based result set with contents of the
         folder.
@@ -86,7 +91,8 @@ class FolderView(BrowserView):
                 sequence.
         """
         # Extra filter
-        kwargs.update(self.request.get('contentFilter', {}))
+        contentFilters = self.request.get('contentFilters', "{'sort_on':'sortable_title', 'sort_order':'ascending'}")
+        kwargs.update(contentFilters if type(contentFilters) != str else ast.literal_eval(contentFilters))
         if 'object_provides' not in kwargs:  # object_provides is more specific
             kwargs.setdefault('portal_type', self.friendly_types)
         kwargs.setdefault('batch', True)
