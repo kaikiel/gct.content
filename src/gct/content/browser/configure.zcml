@@ -46,7 +46,7 @@
       name="folder_product_view"
       for="plone.app.contenttypes.interfaces.IFolder"
       template="templates/folder_product_view.pt"
-      class=".folder_view.FolderView"
+      class="plone.app.contenttypes.browser.folder.FolderView"
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
@@ -54,7 +54,8 @@
   <browser:page
       name="folder_news_view"
       for="plone.app.contenttypes.interfaces.IFolder"
-      class=".views.FolderNewsView"
+      class=".folder_news_view.FolderView"
+      template="templates/folder_news_view.pt"
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
@@ -67,4 +68,11 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="news_item_view"
+      for="plone.app.contenttypes.interfaces.INewsItem"
+      class=".views.NewsItemView"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
 </configure>

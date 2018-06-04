@@ -131,3 +131,5 @@ class FolderView(BrowserView):
             default=u'There are currently no items in this folder.'
         )
 
+    def toLocalizedTime(self, time, long_format=None, time_only=None):
+        return self.plone_view.toLocalizedTime(time, long_format, time_only)

@@ -33,7 +33,6 @@
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
     <element value="plone.app.content.interfaces.INameFromTitle"/>
-    <element value="plone.app.dexterity.behaviors.metadata.ICategorization" />
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
   </property>
