@@ -82,4 +82,12 @@
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
+  <browser:page
+      name="subscribe_email"
+      for="*"
+      class=".views.SubscribeEmail"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
 </configure>
