@@ -9,5 +9,19 @@
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
         handler=".event.move_to_top"
     />
-
+    <subscriber
+        for="plone.app.contenttypes.interfaces.IFile
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.move_to_top"
+    />
+    <subscriber
+        for="plone.app.contenttypes.interfaces.IImage
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.move_to_top"
+    />
+    <subscriber
+        for="plone.app.contenttypes.interfaces.INewsItem
+             zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.move_to_top"
+    />
 </configure>
