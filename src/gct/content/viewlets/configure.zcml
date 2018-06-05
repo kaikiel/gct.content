@@ -17,7 +17,7 @@
     <browser:viewlet
         name="news_product"
         for="gct.content.content.cover.ICover"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
         template="news_product.pt"
         class=".viewlet.NewsProduct"
         layer="zope.interface.Interface"
@@ -27,7 +27,7 @@
     <browser:viewlet
         name="news_item_banner"
         for="gct.content.content.cover.ICover"
-        manager="plone.app.layout.viewlets.interfaces.IAboveContent"
+        manager="plone.app.layout.viewlets.interfaces.IAboveContentBody"
         template="news_item_banner.pt"
         class=".viewlet.NewsItemBanner"
         layer="zope.interface.Interface"
