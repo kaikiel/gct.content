@@ -90,3 +90,18 @@ class NewsItemView(BrowserView):
     def __call__(self):
         request = self.request
         return self.template()
+
+
+class SubscribeEmail(BrowserView):
+    def __call__(self):
+	email = self.request.get('email')
+	body_str = """Subscribe: {}""".format(email)
+        mime_text = MIMEText(body_str, 'html', 'utf-8')
+        api.portal.send_email(
+            recipient="ah13441673@gmail.com",
+            sender="henry@mingtak.com.tw",
+            subject="訂閱",
+            body=mime_text.as_string(),
+        )
+        api.portal.show_message(message='發送成功!'.decode('utf-8'), request=self.request)
+	self.request.response.redirect(self.request.HTTP_REFERER)
