@@ -43,10 +43,17 @@
       />
 
   <browser:page
+      name="coverListing"
+      for="Products.CMFCore.interfaces.IFolderish"
+      class=".folder_view.CoverListing"
+      permission="zope2.View"
+  />
+
+  <browser:page
       name="folder_product_view"
       for="plone.app.contenttypes.interfaces.IFolder"
       template="templates/folder_product_view.pt"
-      class="plone.app.contenttypes.browser.folder.FolderView"
+      class=".folder_view.FolderProductView"
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
@@ -54,7 +61,7 @@
   <browser:page
       name="folder_news_view"
       for="plone.app.contenttypes.interfaces.IFolder"
-      class=".folder_news_view.FolderView"
+      class="plone.app.contenttypes.browser.folder.FolderView"
       template="templates/folder_news_view.pt"
       layer="zope.interface.Interface"
       permission="zope2.View"

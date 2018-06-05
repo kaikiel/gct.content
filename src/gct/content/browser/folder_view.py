@@ -1,66 +1,34 @@
 # -*- coding: utf-8 -*-
+from plone import api
 from Acquisition import aq_base
 from Acquisition import aq_inner
-from Products.CMFPlone.interfaces import ISiteSchema
 from plone.app.contenttypes import _
-from plone.app.contenttypes.interfaces import IFolder
-from plone.app.contenttypes.interfaces import IImage
-from plone.event.interfaces import IEvent
-from plone.memoize.view import memoize
-from plone.registry.interfaces import IRegistry
 from Products.CMFPlone.PloneBatch import Batch
-from Products.CMFPlone.utils import safe_callable
+from plone.app.contenttypes.browser.folder import FolderView
+from plone.app.contentlisting.interfaces import IContentListing
+from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
-from zope.component import getMultiAdapter
-from zope.component import getUtility
-from zope.contentprovider.interfaces import IContentProvider
+from sets import Set
 import ast
 import random
 
 
-HAS_SECURITY_SETTINGS = True
-try:
-    from Products.CMFPlone.interfaces import ISecuritySchema
-except ImportError:
-    HAS_SECURITY_SETTINGS = False
+class CoverListing(BrowserView):
+    
+    def __call__(self,**kw):
+        query = {}
+        query.update(**kw)
+        query.setdefault('portal_type', 'Product')
+        catalog = getToolByName(self.context, 'portal_catalog')
+        results = catalog(query)
+        return IContentListing(results)
 
 
-class FolderView(BrowserView):
 
-    text_class = None
-    _plone_view = None
-    _portal_state = None
-    _pas_member = None
+class FolderProductView(FolderView):
 
     def pdb(self):
         import pdb;pdb.set_trace()
-
-    @property
-    def plone_view(self):
-        if not self._plone_view:
-            self._plone_view = getMultiAdapter(
-                (self.context, self.request),
-                name=u'plone'
-            )
-        return self._plone_view
-
-    @property
-    def portal_state(self):
-        if not self._portal_state:
-            self._portal_state = getMultiAdapter(
-                (self.context, self.request),
-                name=u'plone_portal_state'
-            )
-        return self._portal_state
-
-    @property
-    def pas_member(self):
-        if not self._pas_member:
-            self._pas_member = getMultiAdapter(
-                (self.context, self.request),
-                name=u'pas_member'
-            )
-        return self._pas_member
 
     @property
     def b_size(self):
@@ -69,14 +37,40 @@ class FolderView(BrowserView):
         return int(b_size)
 
     @property
-    def b_start(self):
-        b_start = getattr(self.request, 'b_start', None) or 0
-        return int(b_start)
+    def sort_on(self):
+        sort_on = getattr(self.request, 'sort_on', 'sortable_title')
+        return sort_on
 
     @property
-    def short_by(self):
-        short_by = getattr(self.request, 'contentFilters', "{'sort_on':'sortable_title', 'sort_order':'ascending'}")
-        return short_by 
+    def sort_order(self):
+        sort_order = getattr(self.request, 'sort_order', 'ascending')
+        return sort_order
+
+    @property
+    def sort_by(self):
+        sort_by = "sort_on:{},sort_order:{}".format(self.sort_on, self.sort_order) 
+        return sort_by 
+
+    @property
+    def p_category(self):
+        p_category = getattr(self.request, 'p_category', '')
+        p_category = p_category if p_category != 'No Category' else None
+        return p_category
+
+    @property
+    def p_subject(self):
+        p_subject = getattr(self.request, 'p_subject', '')
+        p_subject = p_subject if p_subject != 'No Subject' else None
+        return p_subject
+    
+    def categoryDict(self):
+        categoryDict = {}
+        products = api.content.find(context=self.context, portal_type="Product")
+        for item in products:
+            category = item.getObject().category if item.getObject().category != None else 'No Category'
+            subject  = item.getObject().subject if  item.getObject().subject != None else 'No Subject'
+            categoryDict[category].add(subject) if categoryDict.has_key(category) else categoryDict.update({category: set([subject])})
+        return categoryDict
 
     def results(self, **kwargs):
         """Return a content listing based result set with contents of the
@@ -91,16 +85,21 @@ class FolderView(BrowserView):
                 sequence.
         """
         # Extra filter
-        contentFilters = self.request.get('contentFilters', "{'sort_on':'sortable_title', 'sort_order':'ascending'}")
-        kwargs.update(contentFilters if type(contentFilters) != str else ast.literal_eval(contentFilters))
+        kwargs.update(self.request.get('contentFilter', {}))
         if 'object_provides' not in kwargs:  # object_provides is more specific
-            kwargs.setdefault('portal_type', self.friendly_types)
+            kwargs.setdefault('portal_type', 'Product')
         kwargs.setdefault('batch', True)
         kwargs.setdefault('b_size', self.b_size)
         kwargs.setdefault('b_start', self.b_start)
+        kwargs.setdefault('sort_on', self.sort_on)
+        kwargs.setdefault('sort_order', self.sort_order)
+        if self.p_subject != '':
+            kwargs.setdefault('p_subject', self.p_subject)
+        if self.p_category != '':
+            kwargs.setdefault('p_category', self.p_category)
 
         listing = aq_inner(self.context).restrictedTraverse(
-            '@@folderListing', None)
+            '@@coverListing', None)
         if listing is None:
             return []
         results = listing(**kwargs)
@@ -115,21 +114,6 @@ class FolderView(BrowserView):
         )
         return batch
 
-    @property
-    def friendly_types(self):
-        return self.portal_state.friendly_types()
-
-    @property
-    def use_view_action(self):
-        registry = getUtility(IRegistry)
-        return registry.get('plone.types_use_view_action_in_listings', [])
-
-    @property
-    def no_items_message(self):
-        return _(
-            'description_no_items_in_folder',
-            default=u'There are currently no items in this folder.'
-        )
-
-    def toLocalizedTime(self, time, long_format=None, time_only=None):
-        return self.plone_view.toLocalizedTime(time, long_format, time_only)
+    def getNewProduct(self):
+        top3Product = api.content.find(portal_type='Product', sort_on='created', sort_order='descending', b_size='3')
+        return top3Product
