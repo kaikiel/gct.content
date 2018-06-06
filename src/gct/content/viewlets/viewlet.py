@@ -26,5 +26,5 @@ class NewsItemBanner(base.ViewletBase):
     def update(self):
         request = self.request
         portal = api.portal.get()
-        newsItemBrains = api.content.find(path='gct/news_container', portal_type="News Item", sort_limit=3)
+        newsItemBrains = api.content.find(path='gct/news_container', portal_type="News Item", sort_limit=3, sort_on='created', sort_order='descending')
         self.newsItemBrains = newsItemBrains
