@@ -37,15 +37,15 @@ class IProduct(model.Schema):
 
     cover = NamedBlobImage(
         title=_(u"Cover Image"),
-        required=False,
+        required=True,
     )
 
     category = schema.TextLine(
 	title=_(u'Category'),
-	required=False,
+	required=True,
     )
 
     subject = schema.TextLine(
 	title=_(u'Subject'),
-	required=False,
+	required=True,
     )

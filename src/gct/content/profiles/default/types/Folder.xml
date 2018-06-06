@@ -14,5 +14,6 @@
     <element value="tabular_view"/>
     <element value="folder_product_view"/>
     <element value="folder_news_view"/>
+    <element value="download_file_view" />
   </property>
 </object>

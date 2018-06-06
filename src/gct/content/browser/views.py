@@ -11,7 +11,7 @@ class DownloadFileView(BrowserView):
         request = self.request
         portal = api.portal.get()
 	fileList = []
-        fileBrains = api.content.find(path='gct/file_container', portal_type='File')
+        fileBrains = api.content.find(context=self.context, portal_type='File')
 	# sort_order not working
 	for item in fileBrains:
 	    fileList.append(item)

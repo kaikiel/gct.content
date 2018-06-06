@@ -20,7 +20,7 @@
 
   <browser:page
       name="download_file_view"
-      for="*"
+      for="plone.app.contenttypes.interfaces.IFolder"
       class=".views.DownloadFileView"
       layer="zope.interface.Interface"
       permission="zope2.View"
