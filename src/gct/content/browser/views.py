@@ -7,6 +7,7 @@ from gct.content.browser.configlet import IDict
 import json
 from plone.protect.interfaces import IDisableCSRFProtection 
 from zope.interface import alsoProvides
+from zope.globalrequest import getRequest
 
 
 class DownloadFileView(BrowserView):
@@ -111,11 +112,15 @@ class SubscribeEmail(BrowserView):
 	self.request.response.redirect(self.request.HTTP_REFERER)
 
 
-class UpdateConfiglet(BrowserView):
+class UpdateConfiglet():
     def __call__(self):
 	productBrains = api.content.find(path="gct/products", portal_type="Product")
 	data = {}
-        request = self.request
+	try:
+            request = self.request
+        except:
+	    request = getRequest()
+
         alsoProvides(request, IDisableCSRFProtection)
 	# data[buggy] = [0,{'1/4': 0, '1/8': 5} ]
 	# data[${cayegory}] = [${category_count}, { ${subject}: ${subject_count} }]
@@ -131,7 +136,8 @@ class UpdateConfiglet(BrowserView):
 		    else:
 		        data[category][1][subject] = 1
 	        else:
-		    data[category] = [1, {}]
+		    data[category] = [1, {subject: 1}]
+
             data = json.dumps(data).decode('utf-8')
 	    api.portal.set_registry_record('dict', data, interface=IDict)
             return "Successful"

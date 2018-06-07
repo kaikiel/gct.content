@@ -7,7 +7,17 @@
     <subscriber
         for="gct.content.content.product.IProduct 
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
-        handler=".event.move_to_top"
+        handler=".event.update_configlet"
+    />
+    <subscriber
+        for="gct.content.content.product.IProduct
+             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
+        handler=".event.update_configlet"
+    />
+    <subscriber
+        for="gct.content.content.product.IProduct
+             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".event.modify_configlet"
     />
     <subscriber
         for="plone.app.contenttypes.interfaces.IFile
