@@ -12,7 +12,7 @@
     <subscriber
         for="gct.content.content.product.IProduct
              zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-        handler=".event.update_configlet"
+        handler=".event.modify_configlet"
     />
     <subscriber
         for="gct.content.content.product.IProduct
