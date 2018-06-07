@@ -3,6 +3,10 @@ from Products.Five.browser import BrowserView
 from Products.Five.browser.pagetemplatefile import ViewPageTemplateFile
 from plone import api
 from email.mime.text import MIMEText
+from gct.content.browser.configlet import IDict
+import json
+from plone.protect.interfaces import IDisableCSRFProtection 
+from zope.interface import alsoProvides
 
 
 class DownloadFileView(BrowserView):
@@ -111,6 +115,8 @@ class UpdateConfiglet(BrowserView):
     def __call__(self):
 	productBrains = api.content.find(path="gct/products", portal_type="Product")
 	data = {}
+        request = self.request
+        alsoProvides(request, IDisableCSRFProtection)
 	# data[buggy] = [0,{'1/4': 0, '1/8': 5} ]
 	# data[${cayegory}] = [${category_count}, { ${subject}: ${subject_count} }]
         try:
@@ -126,9 +132,8 @@ class UpdateConfiglet(BrowserView):
 		        data[category][1][subject] = 1
 	        else:
 		    data[category] = [1, {}]
-
-	    dict = api.portal.get_registry_record('dict', interface=IDict)
-	    dict = data
+            data = json.dumps(data).decode('utf-8')
+	    api.portal.set_registry_record('dict', data, interface=IDict)
         except  Exception as e:
 	    print e
 	    import pdb;pdb.set_trace()
