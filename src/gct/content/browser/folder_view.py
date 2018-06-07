@@ -8,9 +8,11 @@ from plone.app.contenttypes.browser.folder import FolderView
 from plone.app.contentlisting.interfaces import IContentListing
 from Products.CMFCore.utils import getToolByName
 from Products.Five import BrowserView
+from gct.content.browser.configlet import IDict
 from sets import Set
 import ast
 import random
+import json
 
 
 class CoverListing(BrowserView):
@@ -64,12 +66,7 @@ class FolderProductView(FolderView):
         return p_subject
     
     def categoryDict(self):
-        categoryDict = {}
-        products = api.content.find(context=self.context, portal_type="Product")
-        for item in products:
-            category = item.getObject().category if item.getObject().category != None else 'No Category'
-            subject  = item.getObject().subject if  item.getObject().subject != None else 'No Subject'
-            categoryDict[category].add(subject) if categoryDict.has_key(category) else categoryDict.update({category: set([subject])})
+        categoryDict = ast.literal_eval(api.portal.get_registry_record('dict', interface=IDict))
         return categoryDict
 
     def results(self, **kwargs):

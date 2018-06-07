@@ -134,6 +134,6 @@ class UpdateConfiglet(BrowserView):
 		    data[category] = [1, {}]
             data = json.dumps(data).decode('utf-8')
 	    api.portal.set_registry_record('dict', data, interface=IDict)
+            return "Successful"
         except  Exception as e:
-	    print e
-	    import pdb;pdb.set_trace()
+            return e
