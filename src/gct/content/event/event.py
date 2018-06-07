@@ -8,7 +8,7 @@ def move_to_top(item, event):
     abs_url = api.portal.get().absolute_url()
     request.response.redirect('%s/folder_contents' %abs_url)
 
-def update_configlet(item, event):
+def add_configlet(item, event):
     try:
 	request = getReqeust()
 	item.moveObjectsToTop(item.id)

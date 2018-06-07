@@ -7,7 +7,7 @@
     <subscriber
         for="gct.content.content.product.IProduct 
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
-        handler=".event.update_configlet"
+        handler=".event.add_configlet"
     />
     <subscriber
         for="gct.content.content.product.IProduct
