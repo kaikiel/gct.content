@@ -140,7 +140,6 @@ class UpdateConfiglet():
 
             data = json.dumps(data).decode('utf-8')
 	    api.portal.set_registry_record('dict', data, interface=IDict)
-            return "Success"
+            return "Successful"
         except  Exception as e:
-	    import pdb;pdb.set_trace()
-	    return e
+            return e
