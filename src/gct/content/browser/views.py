@@ -105,3 +105,30 @@ class SubscribeEmail(BrowserView):
         )
         api.portal.show_message(message='發送成功!'.decode('utf-8'), request=self.request)
 	self.request.response.redirect(self.request.HTTP_REFERER)
+
+
+class UpdateConfiglet(BrowserView):
+    def __call__(self):
+	productBrains = api.content.find(path="gct/products", portal_type="Product")
+	data = {}
+	# data[buggy] = [0,{'1/4': 0, '1/8': 5} ]
+	# data[${cayegory}] = [${category_count}, { ${subject}: ${subject_count} }]
+        try:
+            for item in productBrains:
+	        category = item.p_category
+	        subject = item.p_subject
+
+	        if data.has_key(category):
+                    data[category][0] += 1
+		    if data[category][1].has_key(subject):
+		        data[category][1][subject] += 1
+		    else:
+		        data[category][1][subject] = 1
+	        else:
+		    data[category] = [1, {}]
+
+	    dict = api.portal.get_registry_record('dict', interface=IDict)
+	    dict = data
+        except  Exception as e:
+	    print e
+	    import pdb;pdb.set_trace()
