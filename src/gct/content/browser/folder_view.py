@@ -115,5 +115,5 @@ class FolderProductView(FolderView):
         return batch
 
     def getNewProduct(self):
-        top3Product = api.content.find(portal_type='Product', sort_on='created', sort_order='descending', b_size='3')
+        top3Product = api.content.find(portal_type='Product', sort_on='effectiveDate', sort_order='descending', b_size='3')
         return top3Product

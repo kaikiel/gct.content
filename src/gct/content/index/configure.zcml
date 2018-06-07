@@ -5,4 +5,6 @@
     i18n_domain="gct.content">
       <adapter name="p_subject"  factory=".indexers.product_subject" />
       <adapter name="p_category" factory=".indexers.product_category" />
+      <adapter name="effectiveDate" factory=".indexers.effectiveDate" />
+      <adapter name="effectiveDateNews" factory=".indexers.effectiveDate_News" />
 </configure>
