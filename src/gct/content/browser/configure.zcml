@@ -20,8 +20,9 @@
 
   <browser:page
       name="download_file_view"
+      template="templates/download_file_view.pt"
       for="plone.app.contenttypes.interfaces.IFolder"
-      class=".views.DownloadFileView"
+      class=".folder_view.FolderDownloadView"
       layer="zope.interface.Interface"
       permission="zope2.View"
       />
@@ -61,7 +62,7 @@
   <browser:page
       name="folder_news_view"
       for="plone.app.contenttypes.interfaces.IFolder"
-      class="plone.app.contenttypes.browser.folder.FolderView"
+      class=".folder_view.FolderNewsView"
       template="templates/folder_news_view.pt"
       layer="zope.interface.Interface"
       permission="zope2.View"
