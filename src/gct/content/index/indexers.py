@@ -13,10 +13,3 @@ def product_subject(obj):
 def product_category(obj):
     return obj.category 
 
-@indexer(IProduct)
-def effectiveDate(obj):
-    return obj.EffectiveDate() 
-
-@indexer(INewsItem)
-def effectiveDate_News(obj):
-    return obj.EffectiveDate()

@@ -61,7 +61,7 @@
   <browser:page
       name="folder_news_view"
       for="plone.app.contenttypes.interfaces.IFolder"
-      class="plone.app.contenttypes.browser.folder.FolderView"
+      class=".folder_view.FolderNewsView"
       template="templates/folder_news_view.pt"
       layer="zope.interface.Interface"
       permission="zope2.View"

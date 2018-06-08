@@ -112,5 +112,43 @@ class FolderProductView(FolderView):
         return batch
 
     def getNewProduct(self):
-        top3Product = api.content.find(portal_type='Product', sort_on='effectiveDate', sort_order='descending', b_size='3')
+        top3Product = api.content.find(portal_type='Product', sort_on='created', sort_order='descending', b_size='3')
         return top3Product
+
+
+class FolderNewsView(FolderView):
+    
+    @property
+    def b_size(self):
+        b_size = getattr(self.request, 'b_size', None)\
+            or getattr(self.request, 'limit_display', None) or 12
+        return int(b_size)
+
+    def results(self, **kwargs):
+        """Return a content listing based result set with contents of the
+        folder.
+
+        :param **kwargs: Any keyword argument, which can be used for catalog
+                         queries.
+        :type  **kwargs: keyword argument
+
+        :returns: plone.app.contentlisting based result set.
+        :rtype: ``plone.app.contentlisting.interfaces.IContentListing`` based
+                sequence.
+        """
+        # Extra filter
+        kwargs.update(self.request.get('contentFilter', {}))
+        if 'object_provides' not in kwargs:  # object_provides is more specific
+            kwargs.setdefault('portal_type', 'News Item')
+        kwargs.setdefault('batch', True)
+        kwargs.setdefault('b_size', self.b_size)
+        kwargs.setdefault('b_start', self.b_start)
+        kwargs.setdefault('sort_on', 'created')
+        kwargs.setdefault('sort_order', 'descending')
+
+        listing = aq_inner(self.context).restrictedTraverse(
+            '@@coverListing', None)
+        if listing is None:
+            return []
+        results = listing(**kwargs)
+        return results

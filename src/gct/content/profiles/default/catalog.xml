@@ -9,12 +9,4 @@
     <indexed_attr value="p_subject" />
   </index>
   <column value="p_subject"/>
-
-  <index name="effectiveDate" meta_type="FieldIndex">
-    <indexed_attr value="effectiveDate" />
-  </index>
-  
-  <index name="effectiveDateNews" meta_type="FieldIndex">
-    <indexed_attr value="effectiveDateNews" />
-  </index>
 </object>
