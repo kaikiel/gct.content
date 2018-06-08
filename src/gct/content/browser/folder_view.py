@@ -152,3 +152,42 @@ class FolderNewsView(FolderView):
             return []
         results = listing(**kwargs)
         return results
+
+
+class FolderDownloadView(FolderView):
+    
+    @property
+    def b_size(self):
+        b_size = getattr(self.request, 'b_size', None)\
+            or getattr(self.request, 'limit_display', None) or 12
+        return int(b_size)
+
+    def results(self, **kwargs):
+        """Return a content listing based result set with contents of the
+        folder.
+
+        :param **kwargs: Any keyword argument, which can be used for catalog
+                         queries.
+        :type  **kwargs: keyword argument
+
+        :returns: plone.app.contentlisting based result set.
+        :rtype: ``plone.app.contentlisting.interfaces.IContentListing`` based
+                sequence.
+        """
+        # Extra filter
+        kwargs.update(self.request.get('contentFilter', {}))
+        if 'object_provides' not in kwargs:  # object_provides is more specific
+            kwargs.setdefault('portal_type', 'File')
+        kwargs.setdefault('batch', True)
+        kwargs.setdefault('b_size', self.b_size)
+        kwargs.setdefault('b_start', self.b_start)
+        kwargs.setdefault('sort_on', 'created')
+        kwargs.setdefault('sort_order', 'descending')
+        kwargs.setdefault('context', self.context)
+
+        listing = aq_inner(self.context).restrictedTraverse(
+            '@@coverListing', None)
+        if listing is None:
+            return []
+        results = listing(**kwargs)
+        return results

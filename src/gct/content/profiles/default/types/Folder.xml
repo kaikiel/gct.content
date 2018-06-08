@@ -5,6 +5,16 @@
     name="Folder"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
+  <property name="filter_content_types">True</property>
+  <property name="allowed_content_types">
+    <element value="Document" />
+    <element value="Product" />
+    <element value="NewsItem" />
+    <element value="Image" />
+    <element value="File" />
+    <element value="Folder" />
+  </property>
+
   <property name="view_methods">
     <element value="album_view"/>
     <element value="event_listing"/>

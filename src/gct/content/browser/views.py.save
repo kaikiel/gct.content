@@ -7,7 +7,21 @@ from gct.content.browser.configlet import IDict
 import json
 from plone.protect.interfaces import IDisableCSRFProtection 
 from zope.interface import alsoProvides
-from zope.globalrequest import getRequest
+
+
+class DownloadFileView(BrowserView):
+    template = ViewPageTemplateFile('templates/download_file_view.pt')
+    def __call__(self):
+        request = self.request
+        portal = api.portal.get()
+	fileList = []
+        fileBrains = api.content.find(context=self.context, portal_type='File')
+	# sort_order not working
+	for item in fileBrains:
+	    fileList.append(item)
+	fileList.reverse()
+        self.fileList = fileList
+        return self.template()
 
 
 class ProductView(BrowserView):
@@ -97,15 +111,11 @@ class SubscribeEmail(BrowserView):
 	self.request.response.redirect(self.request.HTTP_REFERER)
 
 
-class UpdateConfiglet():
+class UpdateConfiglet(BrowserView):
     def __call__(self):
 	productBrains = api.content.find(path="gct/products", portal_type="Product")
 	data = {}
-	try:
-            request = self.request
-        except:
-	    request = getRequest()
-
+        request = self.request
         alsoProvides(request, IDisableCSRFProtection)
 	# data[buggy] = [0,{'1/4': 0, '1/8': 5} ]
 	# data[${cayegory}] = [${category_count}, { ${subject}: ${subject_count} }]
@@ -121,10 +131,10 @@ class UpdateConfiglet():
 		    else:
 		        data[category][1][subject] = 1
 	        else:
-		    data[category] = [1, {subject: 1}]
-
+		    data[category] = [1, {}]
             data = json.dumps(data).decode('utf-8')
 	    api.portal.set_registry_record('dict', data, interface=IDict)
-            return "Successful"
         except  Exception as e:
-            return e
+	    print e
+	    import pdb;pdb.set_trace()
+

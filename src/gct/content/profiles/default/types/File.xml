@@ -5,6 +5,8 @@
     name="File"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n">
 
+  <property name="global_allow">False</property>
+
   <property name="behaviors" purge="false">
     <element value="plone.app.dexterity.behaviors.metadata.ICategorization"/>
     <element value="plone.app.dexterity.behaviors.metadata.IPublication"/>
