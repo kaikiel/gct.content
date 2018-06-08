@@ -7,7 +7,7 @@
     <subscriber
         for="gct.content.content.product.IProduct 
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
-        handler=".event.update_configlet"
+        handler=".event.add_configlet"
     />
     <subscriber
         for="gct.content.content.product.IProduct
@@ -33,5 +33,22 @@
         for="plone.app.contenttypes.interfaces.INewsItem
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
         handler=".event.move_to_top"
+    />
+
+    <subscriber
+        for="zope.interface.Interface plone.dexterity.interfaces.IEditFinishedEvent"
+        handler=".event.toFolderContents"
+    />
+    <subscriber
+        for="zope.interface.Interface plone.dexterity.interfaces.ICancelledEvent"
+        handler=".event.toFolderContents"
+    />
+    <subscriber
+        for="zope.interface.Interface zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.toFolderContents"
+    />
+    <subscriber
+        for="Products.PlonePAS.events.IUserLoggedInEvent"
+        handler=".event.back_to_cover"
     />
 </configure>
