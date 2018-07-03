@@ -161,6 +161,10 @@ class FolderDownloadView(FolderView):
         b_size = getattr(self.request, 'b_size', None)\
             or getattr(self.request, 'limit_display', None) or 12
         return int(b_size)
+    @property
+    def sort_order(self):
+        sort_order = getattr(self.request, 'sort_order', 'ascending')
+        return sort_order
 
     def results(self, **kwargs):
         """Return a content listing based result set with contents of the
@@ -182,7 +186,7 @@ class FolderDownloadView(FolderView):
         kwargs.setdefault('b_size', self.b_size)
         kwargs.setdefault('b_start', self.b_start)
         kwargs.setdefault('sort_on', 'created')
-        kwargs.setdefault('sort_order', 'descending')
+        kwargs.setdefault('sort_order', self.sort_order)
         kwargs.setdefault('context', self.context)
 
         listing = aq_inner(self.context).restrictedTraverse(

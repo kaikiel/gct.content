@@ -10,7 +10,8 @@ from plone.i18n.normalizer.interfaces import IIDNormalizer
 class CoverBanner(base.ViewletBase):
     def update(self):
         portal = api.portal.get()
-        bannerList = api.content.find(path='gct/banner', portal_type='Image', sort_limit=6)
+        #bannerList = api.content.find(path='gct/banner', portal_type='Image', sort_limit=6)
+	bannerList = portal['banner'].getChildNodes()
         self.bannerList = bannerList
 
 
@@ -20,7 +21,6 @@ class NewsProduct(base.ViewletBase):
         portal = api.portal.get()
         productBrains = api.content.find(path='gct/products', portal_type='Product', sort_limit=4, sort_on='created', sort_order='descending')
         self.productBrains = productBrains
-
 
 class NewsItemBanner(base.ViewletBase):
     def update(self):
