@@ -115,6 +115,21 @@ class FolderProductView(FolderView):
         top3Product = api.content.find(portal_type='Product', sort_on='created', sort_order='descending', b_size='3')
         return top3Product
 
+    def getCountResult(self):
+	productBrains = api.content.find(path="gct/products", portal_type="Product")
+        data = {}
+	for item in productBrains:
+            category = item.p_category
+            subject = item.p_subject
+            if data.has_key(category):
+                data[category][0] += 1
+                if data[category][1].has_key(subject):
+                    data[category][1][subject] += 1
+                else:
+                    data[category][1][subject] = 1
+            else:
+                data[category] = [1, {subject: 1}]
+	return data
 
 class FolderNewsView(FolderView):
     
