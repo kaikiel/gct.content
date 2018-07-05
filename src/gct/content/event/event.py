@@ -45,8 +45,9 @@ def toFolderContents(obj, event):
     if request:
         request.response.redirect('%s/folder_contents' % folder.absolute_url())
 
-def back_to_cover(event):
+def back_to_folder_contents(event):
     request = getRequest()
     portal = api.portal.get()
-    request.response.redirect(portal.absolute_url())
+    abs_url = portal.absolute_url()
+    request.response.redirect('%s/folder_contents' %abs_url)
 
