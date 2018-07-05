@@ -3,21 +3,10 @@
     xmlns:plone="http://namespaces.plone.org/plone"
     xmlns:browser="http://namespaces.zope.org/browser"
     i18n_domain="gct.content">
-
     <subscriber
-        for="gct.content.content.product.IProduct 
+        for="gct.content.content.product.IProduct
              zope.lifecycleevent.interfaces.IObjectAddedEvent"
-        handler=".event.add_configlet"
-    />
-    <subscriber
-        for="gct.content.content.product.IProduct
-             zope.lifecycleevent.interfaces.IObjectRemovedEvent"
-        handler=".event.modify_configlet"
-    />
-    <subscriber
-        for="gct.content.content.product.IProduct
-             zope.lifecycleevent.interfaces.IObjectModifiedEvent"
-        handler=".event.modify_configlet"
+        handler=".event.move_to_top"
     />
     <subscriber
         for="plone.app.contenttypes.interfaces.IFile
@@ -49,6 +38,6 @@
     />
     <subscriber
         for="Products.PlonePAS.events.IUserLoggedInEvent"
-        handler=".event.back_to_cover"
+        handler=".event.back_to_folder_contents"
     />
 </configure>

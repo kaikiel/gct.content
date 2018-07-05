@@ -86,9 +86,8 @@ class SubscribeEmail(BrowserView):
     def __call__(self):
 	request = self.request
 	email = request.get('email')
-	subscribe_list = api.content.find(path='gct/subscribe_list')
-	import pdb;pdb.set_trace()
-
+	subscribe_list = api.content.get(path='/subscribe_list')
+	subscribe_list.description += '%s,' %email
 
 class UpdateConfiglet():
     def __call__(self):
