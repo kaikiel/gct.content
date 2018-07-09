@@ -17,7 +17,7 @@ class ICover(model.Schema):
     )
 
     feature = RelationList(
-        title=_(u"Related Product"),
+        title=_(u"Featured Products"),
         default=[],
         value_type=RelationChoice(
             title=_(u"Related"),
