@@ -5,7 +5,8 @@ from plone import api
 from email.mime.text import MIMEText
 from gct.content.browser.configlet import IDict
 import json
-from plone.protect.interfaces import IDisableCSRFProtection 
+from plone.protect.interfaces import IDisableCSRFProtection
+from gct.content.browser.base_inform_configlet import IInform 
 from zope.interface import alsoProvides
 from zope.globalrequest import getRequest
 
@@ -61,6 +62,8 @@ class ContactUs(BrowserView):
     template = ViewPageTemplateFile('templates/contact_us.pt')
     def __call__(self):
         request = self.request
+        self.address = api.portal.get_registry_record('address', interface=IInform, default='').replace('\r\n', '<br>')
+        self.cellphone = api.portal.get_registry_record('cellphone', interface=IInform, default='')
 	name = request.get('name')
 	email = request.get('email')
 	message = request.get('message')

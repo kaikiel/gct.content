@@ -99,6 +99,15 @@
       permission="zope2.View"
       />
 
+  <browser:page
+      name="search_view"
+      for="*"
+      class=".folder_view.FolderProductView"
+      template="templates/search_view.pt"
+      layer="zope.interface.Interface"
+      permission="zope2.View"
+      />
+
 
 <!-- configlet -->
   <browser:page

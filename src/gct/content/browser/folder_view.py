@@ -15,6 +15,27 @@ import random
 import json
 
 
+MULTISPACE = u'\u3000'.encode('utf-8')
+BAD_CHARS = ('?', '-', '+', '*', MULTISPACE)
+
+def quote_chars(s):
+    # We need to quote parentheses when searching text indices
+    if '(' in s:
+        s = s.replace('(', '"("')
+    if ')' in s:
+        s = s.replace(')', '")"')
+    if MULTISPACE in s:
+        s = s.replace(MULTISPACE, ' ')
+    return s
+
+def quote(term):
+    # The terms and, or and not must be wrapped in quotes to avoid
+    # being parsed as logical query atoms.
+    if term.lower() in ('and', 'or', 'not'):
+        term = '"%s"' % term
+    return term
+
+
 class CoverListing(BrowserView):
     
     def __call__(self,**kw):
@@ -42,6 +63,19 @@ class FolderProductView(FolderView):
     def sort_on(self):
         sort_on = getattr(self.request, 'sort_on', 'sortable_title')
         return sort_on
+
+    def munge_search_term(self, q):
+        for char in BAD_CHARS:
+            q = q.replace(char, ' ')
+        r = map(quote, q.split())
+        r = " AND ".join(r)
+        r = quote_chars(r) + '*'
+        return r
+
+    @property
+    def searchableText(self):
+        searchableText = getattr(self.request, 'searchableText', '')
+        return searchableText
 
     @property
     def sort_order(self):
@@ -90,6 +124,11 @@ class FolderProductView(FolderView):
         kwargs.setdefault('b_start', self.b_start)
         kwargs.setdefault('sort_on', self.sort_on)
         kwargs.setdefault('sort_order', self.sort_order)
+        kwargs.setdefault('SearchableText', self.searchableText)
+
+        if self.searchableText:
+            kwargs['SearchableText'] = self.munge_search_term(self.searchableText)
+
         if self.p_subject != '':
             kwargs.setdefault('p_subject', self.p_subject)
         if self.p_category != '':
