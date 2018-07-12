@@ -57,13 +57,13 @@ class FolderProductView(FolderView):
     def p_category(self):
         p_category = getattr(self.request, 'p_category', '')
         p_category = p_category if p_category != 'No Category' else None
-        return p_category
+        return p_category.decode("utf8")
 
     @property
     def p_subject(self):
         p_subject = getattr(self.request, 'p_subject', '')
         p_subject = p_subject if p_subject != 'No Subject' else None
-        return p_subject
+        return p_subject.decode("utf8")
     
     def categoryDict(self):
         categoryDict = ast.literal_eval(api.portal.get_registry_record('dict', interface=IDict))
@@ -176,10 +176,25 @@ class FolderDownloadView(FolderView):
         b_size = getattr(self.request, 'b_size', None)\
             or getattr(self.request, 'limit_display', None) or 12
         return int(b_size)
+
     @property
     def sort_order(self):
         sort_order = getattr(self.request, 'sort_order', 'ascending')
         return sort_order
+
+    @property
+    def f_category(self):
+        f_category = getattr(self.request, 'f_category', '')
+        return f_category.decode("utf8")
+
+    def getCategory(self):
+        files = api.content.find(context=self.context, portal_type="File")
+        categoryList = []
+        for item in files:
+            category = item.f_category
+            if category and category not in categoryList:
+                categoryList.append(category)
+        return sorted(categoryList)
 
     def results(self, **kwargs):
         """Return a content listing based result set with contents of the
@@ -203,6 +218,8 @@ class FolderDownloadView(FolderView):
         kwargs.setdefault('sort_on', 'created')
         kwargs.setdefault('sort_order', self.sort_order)
         kwargs.setdefault('context', self.context)
+        if self.f_category != '':
+            kwargs.setdefault('f_category', self.f_category)
 
         listing = aq_inner(self.context).restrictedTraverse(
             '@@coverListing', None)

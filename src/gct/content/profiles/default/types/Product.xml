@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<object xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+<object xmlns:i18n="http://xml.zope.org/namespaces/i17n"
     name="Product"
     meta_type="Dexterity FTI"
     i18n:domain="gct.content">
@@ -21,7 +21,7 @@
   <property name="global_allow">False</property>
   <property name="filter_content_types">True</property>
   <property name="allowed_content_types">
-    <element value="ProductIMG" />
+    <element value="Image" />
   </property>
   <!-- Schema, class and security -->
   <property name="add_permission">gct.content.AddProduct</property>
@@ -33,6 +33,7 @@
   <!-- Enabled behaviors -->
   <property name="behaviors" purge="false">
     <element value="plone.app.content.interfaces.INameFromTitle"/>
+    <element value="plone.app.dexterity.behaviors.metadata.IPublication"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousEnabled"/>
     <element value="plone.app.dexterity.behaviors.nextprevious.INextPreviousToggle"/>
   </property>

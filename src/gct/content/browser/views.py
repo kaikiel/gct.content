@@ -15,11 +15,13 @@ class ProductView(BrowserView):
     def __call__(self):
         imgList = []
         coverImg = self.context.cover
-#        if coverImg != None:
-#            imgList.append(self.context.absolute_url()+'/@@images/cover')
         productImgs = api.content.find(context=self.context, depth=1)
-        for item in productImgs:
-            imgList.append('{}/@@images/image/preview'.format(item.getObject().absolute_url()))
+        imgNameList = ['img1', 'img2', 'img3', 'img4', 'img5']
+        for imgName in imgNameList:
+            if getattr(self.context, imgName):
+                imgList.append('{}/@@images/{}'.format( self.context.absolute_url(), imgName) )
+        if imgList == []:
+            imgList.append(self.context.absolute_url()+'/@@images/cover')
         self.imgList = imgList
         
         self.title = self.context.title

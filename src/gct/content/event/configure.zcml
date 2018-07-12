@@ -40,4 +40,15 @@
         for="Products.PlonePAS.events.IUserLoggedInEvent"
         handler=".event.back_to_folder_contents"
     />
+    <!-- 修正 resolveuid 位址錯誤的問題(Add) -->
+    <subscriber
+        for="zope.interface.Interface gct.content.content.product.IProduct zope.lifecycleevent.interfaces.IObjectAddedEvent"
+        handler=".event.updateRichText"
+    />
+    <!-- 修正 resolveuid 位址錯誤的問題(Modify) -->
+    <subscriber
+        for="zope.interface.Interface zope.lifecycleevent.interfaces.IObjectModifiedEvent"
+        handler=".event.updateRichText"
+    />
+
 </configure>

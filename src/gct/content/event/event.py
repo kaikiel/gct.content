@@ -1,6 +1,7 @@
 from plone import api
 from zope.globalrequest import getRequest
 from gct.content.browser.views import UpdateConfiglet
+from plone.app.textfield.value import RichTextValue
 
 def move_to_top(item, event):
     request = getRequest()
@@ -51,3 +52,18 @@ def back_to_folder_contents(event):
     abs_url = portal.absolute_url()
     request.response.redirect('%s/folder_contents' %abs_url)
 
+def replaceRichText(obj, attrStr):
+    try:
+        value = getattr(obj, attrStr, None).raw
+        while 1:
+            if '../resolveuid' in value:
+                value = value.replace('../resolveuid', 'resolveuid')
+            else:
+                setattr(obj, attrStr, RichTextValue(value))
+                break
+    except:pass
+
+
+
+def updateRichText(obj, event):
+    replaceRichText(obj, 'body')
