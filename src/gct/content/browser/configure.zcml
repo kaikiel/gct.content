@@ -102,7 +102,7 @@
   <browser:page
       name="search_view"
       for="*"
-      class=".folder_view.FolderProductView"
+      class=".folder_view.SearchView"
       template="templates/search_view.pt"
       layer="zope.interface.Interface"
       permission="zope2.View"

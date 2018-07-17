@@ -170,6 +170,15 @@ class FolderProductView(FolderView):
                 data[category] = [1, {subject: 1}]
 	return data
 
+
+class SearchView(FolderProductView):
+
+    @property
+    def viewTitle(self):
+        viewTitle = _(u'Search')
+        return viewTitle
+
+
 class FolderNewsView(FolderView):
     
     @property
