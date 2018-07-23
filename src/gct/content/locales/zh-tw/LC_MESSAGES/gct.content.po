@@ -1,6 +1,3 @@
-# --- PLEASE EDIT THE LINES BELOW CORRECTLY ---
-# SOME DESCRIPTIVE TITLE.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
@@ -15,7 +12,7 @@ msgstr ""
 "Language-Code: en\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
-"Domain: gct.content\n"
+"Domain: DOMAIN\n"
 
 #: ./content/productimg.py:13
 msgid "Add image in 'Product' content"
@@ -23,7 +20,7 @@ msgstr ""
 
 #: ./browser/base_inform_configlet.py:58
 msgid "Basic Inform"
-msgstr ""
+msgstr "公司資訊"
 
 #: ./content/product.py:25
 msgid "Be Applicable"
@@ -31,7 +28,7 @@ msgstr ""
 
 #: ./content/product.py:50
 msgid "Category"
-msgstr ""
+msgstr "分類"
 
 #: ./content/product.py:30
 msgid "Characteristic"
@@ -43,7 +40,7 @@ msgstr ""
 
 #: ./content/product.py:45
 msgid "Cover Image"
-msgstr ""
+msgstr "封面照片"
 
 #: ./browser/configlet.py:24
 msgid "Custom Related Setting"
@@ -51,16 +48,16 @@ msgstr ""
 
 #: ./content/product.py:35
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: ./browser/base_inform_configlet.py:18
 msgid "Display on Footer and Contact us page"
-msgstr ""
+msgstr "顯示於網站頁尾以及Contact us 頁面"
 
 #: ./profiles/default/types/Cover.xml
 #: ./profiles/default/types/ProductIMG.xml
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 #: ./content/cover.py:20
 msgid "Featured Products"
@@ -100,35 +97,35 @@ msgstr ""
 
 #: ./content/product.py:59
 msgid "Slider"
-msgstr ""
+msgstr "商品照片(內頁顯示)"
 
 #: ./content/product.py:61
 msgid "Slider Image1"
-msgstr ""
+msgstr "商品照片1"
 
 #: ./content/product.py:66
 msgid "Slider Image2"
-msgstr ""
+msgstr "商品照片2"
 
 #: ./content/product.py:71
 msgid "Slider Image3"
-msgstr ""
+msgstr "商品照片3"
 
 #: ./content/product.py:76
 msgid "Slider Image4"
-msgstr ""
+msgstr "商品照片4"
 
 #: ./content/product.py:81
 msgid "Slider Image5"
-msgstr ""
+msgstr "商品照片5"
 
 #: ./content/product.py:55
 msgid "Subject"
-msgstr ""
+msgstr "子分類"
 
 #: ./browser/base_inform_configlet.py:51
 msgid "Subscribe Email is not valid!"
-msgstr ""
+msgstr "Subscribe Email 格式不正確"
 
 #: ./browser/base_inform_configlet.py:37
 msgid "Subscribe Emails"
@@ -144,7 +141,7 @@ msgstr ""
 
 #: ./browser/base_inform_configlet.py:38
 msgid "Used to receiving Email from Contact us page"
-msgstr ""
+msgstr "用於接收Contact us 頁面寄出的Email"
 
 #: ./profiles/default/types/Cover.xml
 #: ./profiles/default/types/ProductIMG.xml
@@ -153,23 +150,23 @@ msgstr ""
 
 #: ./browser/base_inform_configlet.py:27
 msgid "Your Address"
-msgstr ""
+msgstr "公司地址"
 
 #: ./browser/base_inform_configlet.py:22
 msgid "Your Cellphone"
-msgstr ""
+msgstr "公司電話"
 
 #: ./browser/base_inform_configlet.py:17
 msgid "Your Email"
-msgstr ""
+msgstr "公司Email"
 
 #: ./browser/base_inform_configlet.py:49
 msgid "Your Email is not valid!"
-msgstr ""
+msgstr "公司Email 格式不正確"
 
 #: ./browser/base_inform_configlet.py:32
 msgid "Your Fax"
-msgstr ""
+msgstr "公司傳真"
 
 #: ./configure.zcml:32
 msgid "gct.content"

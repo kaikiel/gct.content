@@ -31,6 +31,11 @@ class IProduct(model.Schema):
         required=False,
     )
 
+    description = schema.Text(
+        title=_(u'Description'),
+        required=False,
+    )
+
     body = RichText(
         title=_(u'Product Description'),
         required=False,

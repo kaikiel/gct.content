@@ -20,9 +20,9 @@ class ProductView(BrowserView):
         imgNameList = ['img1', 'img2', 'img3', 'img4', 'img5']
         for imgName in imgNameList:
             if getattr(self.context, imgName):
-                imgList.append('{}/@@images/{}'.format( self.context.absolute_url(), imgName) )
+                imgList.append('{}/@@images/{}/big'.format( self.context.absolute_url(), imgName) )
         if imgList == []:
-            imgList.append(self.context.absolute_url()+'/@@images/cover')
+            imgList.append(self.context.absolute_url()+'/@@images/cover/big')
         self.imgList = imgList
         
         self.title = self.context.title
@@ -70,10 +70,11 @@ class ContactUs(BrowserView):
 	if name and email and message:
 	    body_str = """Name:{}<br/>Email:{}<br/>Message:{}""".format(name, email, message)
             mime_text = MIMEText(body_str, 'html', 'utf-8')
+            receive_email = api.portal.get_registry_record('test', interface=IInform, default='')
             api.portal.send_email(
-                recipient="ah13441673@gmail.com",
-                sender="henry@mingtak.com.tw",
-                subject="意見提供",
+                recipient=receive_email,
+                sender=email,
+                subject="{} 意見提供".format(name),
                 body=mime_text.as_string(),
             )
 	api.portal.show_message(message='發送成功!'.decode('utf-8'), request=request)

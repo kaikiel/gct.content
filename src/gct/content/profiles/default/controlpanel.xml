@@ -12,12 +12,12 @@
         condition_expr=""
         url_expr="string:${portal_url}/@@categoriesControlPanel"
         icon_expr="string:/favicon.ico"
-        visible="True"
+        visible="False"
         i18n:attributes="title">
             <permission>Manage portal</permission>
     </configlet>
     <configlet
-        title="Basic Inform"
+        title="Basic Info"
         action_id="gct.connect.Inform"
         appId="gct.connect"
         category="Products"
