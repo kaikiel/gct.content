@@ -5,5 +5,6 @@
     i18n_domain="gct.content">
       <adapter name="p_subject"  factory=".indexers.product_subject" />
       <adapter name="p_category" factory=".indexers.product_category" />
+      <adapter name="p_modelNo" factory=".indexers.product_modelNo" />
       <adapter name="f_category" factory=".indexers.file_category" />
 </configure>

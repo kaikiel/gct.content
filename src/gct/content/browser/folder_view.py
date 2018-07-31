@@ -120,8 +120,6 @@ class FolderProductView(FolderView):
         if 'object_provides' not in kwargs:  # object_provides is more specific
             kwargs.setdefault('portal_type', 'Product')
         kwargs.setdefault('batch', True)
-        kwargs.setdefault('b_size', self.b_size)
-        kwargs.setdefault('b_start', self.b_start)
         kwargs.setdefault('sort_on', self.sort_on)
         kwargs.setdefault('sort_order', self.sort_order)
         kwargs.setdefault('SearchableText', self.searchableText)
@@ -204,8 +202,6 @@ class FolderNewsView(FolderView):
         if 'object_provides' not in kwargs:  # object_provides is more specific
             kwargs.setdefault('portal_type', 'News Item')
         kwargs.setdefault('batch', True)
-        kwargs.setdefault('b_size', self.b_size)
-        kwargs.setdefault('b_start', self.b_start)
         kwargs.setdefault('sort_on', 'created')
         kwargs.setdefault('sort_order', 'descending')
 

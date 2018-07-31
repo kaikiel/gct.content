@@ -5,8 +5,9 @@ from plone.app.textfield.value import RichTextValue
 
 def move_to_top(item, event):
     request = getRequest()
-    item.moveObjectsToTop(item.id)
-    abs_url = api.portal.get().absolute_url()
+    folder = item.getParentNode()
+    folder.moveObjectsToTop(item.id)
+    abs_url = folder.absolute_url()
     request.response.redirect('%s/folder_contents' %abs_url)
 
 def add_configlet(item, event):

@@ -14,4 +14,9 @@
     <indexed_attr value="p_subject" />
   </index>
   <column value="p_subject"/>
+
+  <index name="p_modelNo" meta_type="FieldIndex">
+    <indexed_attr value="p_modelNo" />
+  </index>
+  <column value="p_modelNo"/>
 </object>

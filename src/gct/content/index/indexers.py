@@ -13,6 +13,10 @@ def product_subject(obj):
 def product_category(obj):
     return obj.category
  
+@indexer(IProduct)
+def product_modelNo(obj):
+    return obj.modelNo
+ 
 @indexer(IFile)
 def file_category(obj):
     return obj.category 
